@@ -17,7 +17,9 @@ online demo : https://www.typescriptlang.org/play
 * npm i -g typescript  >>  安裝 typescript
 * tsc - v   >> 查看 tsc 安裝版本
 
-![image-20210119094458547](C:\Users\Admin\AppData\Roaming\Typora\typora-user-images\image-20210119094458547.png)
+![image-20210119094458547](Image/Readme/image-20210119094458547.png)
+
+
 
 建立hello.ts 於自定義之目錄  C:/public/mode01
 
@@ -38,7 +40,7 @@ CMD 切換至 C:/public/mode01目錄，執行以下語法
 > i="aaa";
 > console.log(i+100);
 
-![image-20210119095534326](C:\Users\Admin\AppData\Roaming\Typora\typora-user-images\image-20210119095534326.png)
+![image-20210119095534326](Image/Readme/image-20210119095534326.png)
 
 編譯失敗也會產生js.
 
@@ -52,7 +54,7 @@ CMD 切換至 C:/public/mode01目錄，執行以下語法
 
 * ts-node hello.js  >> 執行hello.js 
 
-![image-20210119100017943](C:\Users\Admin\AppData\Roaming\Typora\typora-user-images\image-20210119100017943.png)
+![image-20210119100017943](Image/Readme/image-20210119100017943.png)
 
 
 
@@ -62,15 +64,15 @@ CMD 切換至 C:/public/mode01目錄，執行以下語法
 
 File > Open Folder > 選擇自定義目錄 ( or 專案路徑 )
 
-![image-20210119100459652](C:\Users\Admin\AppData\Roaming\Typora\typora-user-images\image-20210119100459652.png)
+![image-20210119100459652](Image/Readme/image-20210119100459652.png)
 
 VS Code 安裝 Extension 擴充套件 Code Runner ( 安裝後可直接對 js / ts 直接進行右鍵 )
 
-![image-20210119100405460](C:\Users\Admin\AppData\Roaming\Typora\typora-user-images\image-20210119100405460.png)
+![image-20210119100405460](Image/Readme/image-20210119100405460.png)
 
 設定 File > Preference > Settings > Extension > Run Code Extension > Clear Previous Output
 
-![image-20210119100852484](C:\Users\Admin\AppData\Roaming\Typora\typora-user-images\image-20210119100852484.png)
+![image-20210119100852484](Image/Readme/image-20210119100852484.png)
 
 設定 File > AutoSave (自動儲存) 
 
@@ -82,13 +84,13 @@ tsc --init   >> 會產生 tsconfig.json
 
 於此json可以定義編譯時的設定 EX. 使用的 Javasciprt版本、編譯後的檔案輸出目錄 ... 
 
-![image-20210119101612154](C:\Users\Admin\AppData\Roaming\Typora\typora-user-images\image-20210119101612154.png)
+![image-20210119101612154](Image/Readme/image-20210119101612154.png)
 
 outFile 取消註解 (ctrl + k + u) 改為 "outDir": "./js"
 
 於該目錄執行 tsc 會產生專案檔
 
-![image-20210119104604727](C:\Users\Admin\AppData\Roaming\Typora\typora-user-images\image-20210119104604727.png)
+![image-20210119104604727](Image/Readme/image-20210119104604727.png)
 
 
 
@@ -97,7 +99,7 @@ outFile 取消註解 (ctrl + k + u) 改為 "outDir": "./js"
 * 模式一 、 透過Teriminal > Run Build Task >  直接編譯
 * 模式二 、 即時編譯 Watch模式，可以開兩個視窗( 一個ts 一個編譯後的 js )，編譯完後js會自動產生變化
 
-![image-20210119105412113](C:\Users\Admin\AppData\Roaming\Typora\typora-user-images\image-20210119105412113.png)
+![image-20210119105412113](Image/Readme/image-20210119105412113.png)
 
 於Extension 安裝 code snippets > Clg ==> console.log
 
@@ -115,7 +117,7 @@ var 有提升作用
 >
 > console.log(i); //10
 
-![image-20210119112217471](C:\Users\Admin\AppData\Roaming\Typora\typora-user-images\image-20210119112217471.png)
+![image-20210119112217471](Image/Readme/image-20210119112217471.png)
 
 let 沒有提升
 
@@ -125,15 +127,15 @@ let i=10;
 
 console.log(i); //10
 
-![image-20210119112127796](C:\Users\Admin\AppData\Roaming\Typora\typora-user-images\image-20210119112127796.png)
+![image-20210119112127796](Image/Readme/image-20210119112127796.png)
 
 var 可以重複宣告
 
-![image-20210119112256359](C:\Users\Admin\AppData\Roaming\Typora\typora-user-images\image-20210119112256359.png)
+![image-20210119112256359](Image/Readme/image-20210119112256359.png)
 
 let 不可以
 
-![image-20210119112321676](C:\Users\Admin\AppData\Roaming\Typora\typora-user-images\image-20210119112321676.png)
+![image-20210119112321676](Image/Readme/image-20210119112321676.png)
 
 結論: 盡量使用let
 
@@ -188,11 +190,11 @@ ES6 => 支援，所以不會轉(使用原本的數值)
 
 ES5 不支援樣板寫法 不過TypeScript編譯會自己轉
 
-![image-20210119114521884](C:\Users\Admin\AppData\Roaming\Typora\typora-user-images\image-20210119114521884.png)
+![image-20210119114521884](Image/Readme/image-20210119114521884.png)
 
 ES6 支援樣板語法，會保留樣板格式。
 
-![image-20210119114620126](C:\Users\Admin\AppData\Roaming\Typora\typora-user-images\image-20210119114620126.png)
+![image-20210119114620126](Image/Readme/image-20210119114620126.png)
 
 ## 2-5. 陣列宣告方式
 
@@ -266,7 +268,7 @@ Example 9. Enum 宣告方式
 >
 > console.log(Color[c]);
 
-![image-20210119131614825](C:\Users\Admin\AppData\Roaming\Typora\typora-user-images\image-20210119131614825.png)
+![image-20210119131614825](Image/Readme/image-20210119131614825.png)
 
 
 
@@ -311,7 +313,7 @@ Undefined 不可以直接輸出
 11_any.ts
 
 盡量避免使用因為，沒有提示，錯誤也不會編譯告知
-![image-20210119133417403](C:\Users\Admin\AppData\Roaming\Typora\typora-user-images\image-20210119133417403.png)
+![image-20210119133417403](Image/Readme/image-20210119133417403.png)
 
 
 
@@ -319,13 +321,13 @@ Undefined 不可以直接輸出
 
 12_void.ts
 
-![image-20210119133754868](C:\Users\Admin\AppData\Roaming\Typora\typora-user-images\image-20210119133754868.png)
+![image-20210119133754868](Image/Readme/image-20210119133754868.png)
 
 指定 void 回傳值後不可以有回傳值。
 
 如果去接值，會出現undefined。
 
-![image-20210119133914180](C:\Users\Admin\AppData\Roaming\Typora\typora-user-images\image-20210119133914180.png)
+![image-20210119133914180](Image/Readme/image-20210119133914180.png)
 
 
 
@@ -354,7 +356,7 @@ Undefined 不可以直接輸出
 
 改成 let a:any="aaa";使用 tsc 編譯會過，但是執行階段會有錯誤。
 
-![image-20210119135743606](C:\Users\Admin\AppData\Roaming\Typora\typora-user-images\image-20210119135743606.png)
+![image-20210119135743606](Image/Readme/image-20210119135743606.png)
 
 
 
@@ -502,7 +504,7 @@ books.forEach(element => {
 
 可參考以下資訊
 
-![image-20210119150315163](C:\Users\Admin\AppData\Roaming\Typora\typora-user-images\image-20210119150315163.png)
+![image-20210119150315163](Image/Readme/image-20210119150315163.png)
 
 
 
@@ -597,7 +599,7 @@ interface 介面名稱
 
 所以就不能加方法，如果要新增方法或屬性，一開始就要定義。
 
-![image-20210119154211443](C:\Users\Admin\AppData\Roaming\Typora\typora-user-images\image-20210119154211443.png)
+![image-20210119154211443](Image/Readme/image-20210119154211443.png)
 
 
 
@@ -614,15 +616,15 @@ interface 介面名稱
 
 產出的 ES 5  == > Class是ES6才有的，ES5 會需要使用function和prototype組成。
 
-![image-20210119160744503](C:\Users\Admin\AppData\Roaming\Typora\typora-user-images\image-20210119160744503.png)
+![image-20210119160744503](Image/Readme/image-20210119160744503.png)
 
 產出的 ES 6 只有建構子跟方法。
 
-![image-20210119160958969](C:\Users\Admin\AppData\Roaming\Typora\typora-user-images\image-20210119160958969.png)
+![image-20210119160958969](Image/Readme/image-20210119160958969.png)
 
 若只有屬性設定，會自己產生預設建構子。
 
-![image-20210119161538668](C:\Users\Admin\AppData\Roaming\Typora\typora-user-images\image-20210119161538668.png)
+![image-20210119161538668](Image/Readme/image-20210119161538668.png)
 
 
 
@@ -633,7 +635,7 @@ interface 介面名稱
 * private 限制存取範圍，只有class內的方法可以使用。
 * 預設都是public 
 
-![image-20210119162044176](C:\Users\Admin\AppData\Roaming\Typora\typora-user-images\image-20210119162044176.png)
+![image-20210119162044176](Image/Readme/image-20210119162044176.png)
 
 
 
@@ -642,7 +644,7 @@ interface 介面名稱
 * 於 Constructor 初始化時寫了存取方式後，產生的語法會自行將成員指定。
 * 如果沒有宣告存取原則，嘖嘖不會自動建立，需要指定
 
-![image-20210119162637189](C:\Users\Admin\AppData\Roaming\Typora\typora-user-images\image-20210119162637189.png)
+![image-20210119162637189](Image/Readme/image-20210119162637189.png)
 
 ## 3-12. Accessor
 
@@ -682,28 +684,28 @@ interface 介面名稱
 
 不適合用簡便寫法，因為會產生不必要的程式碼 this.name = name。
 
-![image-20210119164355339](C:\Users\Admin\AppData\Roaming\Typora\typora-user-images\image-20210119164355339.png)
+![image-20210119164355339](Image/Readme/image-20210119164355339.png)
 
 * 這樣寫，編譯出的就不會有多餘程式碼。
 
-![image-20210119164815184](C:\Users\Admin\AppData\Roaming\Typora\typora-user-images\image-20210119164815184.png)
+![image-20210119164815184](Image/Readme/image-20210119164815184.png)
 
 * 但是因為 name 沒有初始值編譯器會出錯，所有要在 name指定屬性時使用 驚嘆號 來略過編譯器檢查。
 
-![image-20210119164519698](C:\Users\Admin\AppData\Roaming\Typora\typora-user-images\image-20210119164519698.png)
+![image-20210119164519698](Image/Readme/image-20210119164519698.png)
 
 **快速實做 Accessor方法 ** > 
 
 方法一、 對參數右鍵 Refactor 選 generate getter setter 即可。
 
-![image-20210119165002144](C:\Users\Admin\AppData\Roaming\Typora\typora-user-images\image-20210119165002144.png)
+![image-20210119165002144](Image/Readme/image-20210119165002144.png)
 
-![image-20210119165138801](C:\Users\Admin\AppData\Roaming\Typora\typora-user-images\image-20210119165138801.png)
+![image-20210119165138801](Image/Readme/image-20210119165138801.png)
 
 方法二、 prop關鍵字跳出後用tab
 
-![image-20210119165518004](C:\Users\Admin\AppData\Roaming\Typora\typora-user-images\image-20210119165518004.png)
+![image-20210119165518004](Image/Readme/image-20210119165518004.png)
 
 會自動產生以下 Accessor 範本
 
-![image-20210119165535044](C:\Users\Admin\AppData\Roaming\Typora\typora-user-images\image-20210119165535044.png)
+![image-20210119165535044](Image/Readme/image-20210119165535044.png)
