@@ -223,7 +223,7 @@ ES5 不支援樣板寫法 不過TypeScript編譯會自己轉
 
 ![image-20210119114521884](Image/Readme/image-20210119114521884.png)
 
-ES6 支援樣板語法，會保留樣板格式。
+ES6 支援樣板語法，會保留樣板格式
 
 ![image-20210119114620126](Image/Readme/image-20210119114620126.png)
 
@@ -233,9 +233,9 @@ ES6 支援樣板語法，會保留樣板格式。
 
 範本: 07_array.ts
 
-陣列內的元素都要用相同的型別
+陣列內的元素都要用相同的型別。
 
-A. 一般Array寫法
+A. 一般 Array 寫法
 
 ```typescript
 let seasons: string[] = ["Spring", "Summer", "Autumn", "Winter"];
@@ -323,32 +323,30 @@ console.log(Color[c]);
 
 範本: 07_object.js
 
-Undefined  ->物件不存在
+Undefined  --> 物件不存在  , null  --> 物件存在但沒有值。
 
-null -> 物件存在但沒有值
-
-不可以指派null給數值
+* 不可以指派null給數值
 
 ```typescript
 // let i:number=10;
 // i=null;
 ```
 
-除非使用 union type 方式指定
+* 除非使用 union type 方式指定
 
 ```typescript
 let i:number|null=10; //union type
 i=null;
 ```
 
-Undefined 不可以直接輸出
+* Undefined 不可以直接輸出
 
 ```typescript
 // let j:number;
 // console.log(j); 
 ```
 
-除非使用 union type 方式指定
+* 除非使用 union type 方式指定
 
 ```typescript
 let j:number|undefined; //union type
@@ -363,7 +361,10 @@ console.log(j);
 
 11_any.ts
 
-盡量避免使用因為，沒有提示，錯誤也不會編譯告知
+盡量避免使用因為，沒有提示，錯誤也不會編譯告知。
+
+以下為 使用 Any 時執行錯誤狀況，編譯會通過，但產出的 js 執行階段也會出現錯誤。
+
 ![image-20210119133417403](Image/Readme/image-20210119133417403.png)
 
 
@@ -610,8 +611,6 @@ console.log(sub(500,300));
 
 
 
-
-
 ## 3-6. index
 
 範本: 06_indexable.ts
@@ -638,6 +637,8 @@ for (let i = 0; i < ar.length; i++) {
 
 
 ## ＊ 物件
+
+
 
 ## 3-7. Javacript 物件使用方式
 
@@ -720,7 +721,7 @@ ES6 才有的功能
 
 ## 3-12. Accessor
 
-12_accessor.ts
+範本: 12_accessor.ts
 
 使用一般寫法，並撰寫Accesor
 
@@ -744,8 +745,6 @@ console.log(emp.Name);
 ```
 
 不適合用簡便寫法，因為會產生不必要的程式碼 this.name = name。
-
-
 
 ![image-20210119164355339](Image/Readme/image-20210119164355339.png)
 
