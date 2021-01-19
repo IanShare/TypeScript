@@ -359,7 +359,7 @@ console.log(j);
 
 ## 2-9.  Any
 
-11_any.ts
+範本: 11_any.ts
 
 盡量避免使用因為，沒有提示，錯誤也不會編譯告知。
 
@@ -413,7 +413,7 @@ console.log((<number>a).toFixed(2));
 console.log((a as number).toFixed(2));
 ```
 
-改成 let a:any="aaa";使用 tsc 編譯會過，但是執行階段會有錯誤。
+改成 let a:any="aaa"; 使用 tsc 編譯會過，但是執行階段會有錯誤。
 
 ![image-20210119135743606](Image/Readme/image-20210119135743606.png)
 
@@ -463,31 +463,30 @@ let func1= (p:{x:number, y:number})=> {
 
 重複使用介面時，先定義再宣告使用，介面是用來限制物件資料型別用的。
 
-以下屬於僅定義資料的 interface
+以下屬於僅定義資料的 interface。
 
-> interface MyFunc {
->
-> ​		x:number;
->
-> ​		y:number;
->
-> }
-
-
-
-> function func1(p:MyFunc) {
->
-> ​		console.log(p.x, p.y);
->
-> }
+```typescript
+interface MyFunc {
+	x:number;
+	y:number;
+}
+```
 
 
 
-> let func2=function (p:MyFunc) {
->
-> ​		console.log(p.x, p.y);
->
-> };
+```typescript
+function func1(p:MyFunc) {
+	console.log(p.x, p.y);
+}
+```
+
+
+
+```typescript
+let func2=function (p:MyFunc) {
+	console.log(p.x, p.y);
+};
+```
 
 
 
@@ -495,41 +494,40 @@ let func1= (p:{x:number, y:number})=> {
 
 範本:  03_interface.ts
 
-book 直接透過 inference 推斷，來做 book型別的指定
+book 直接透過 inference 推斷，來做 book 型別的指定
 
 book2 透過 inline interface 指定其型別
 
-> let book = {title:"ts",price:200};
->
-> console.log(book.title,book.price);
->
-> // book.id=1; //error
->
-> let book2:{title:string, price:number};
->
-> book2={title:"js",price:300};
->
-> console.log(book2.title,book2.price);
+```typescript
+let book = {title:"ts",price:200};
 
-直接定義 interface Book，並宣告books 是用來存放 Book 的 Array，並且指派上面兩種符合規範的物件。
+console.log(book.title,book.price);
 
-> interface Book{
->
-> ​		title:string;
->
-> ​		price:number;
->
-> }
->
-> 
->
-> let books:Book[]=[book,book2];
->
-> books.forEach(element => {
->
-> ​		console.log(element.title, element.price);
->
-> });
+// book.id=1; //error
+
+let book2:{title:string, price:number};
+
+book2={title:"js",price:300};
+
+console.log(book2.title,book2.price);
+```
+
+
+
+直接定義 interface Book，並宣告 books 是用來存放 Book 的 Array，並且指派上面兩種符合規範的物件。
+
+```typescript
+interface Book {
+	title:string;
+	price:number;
+}
+
+let books:Book[]=[book,book2];
+
+books.forEach(element => {
+	console.log(element.title, element.price);
+});
+```
 
 
 
@@ -539,37 +537,32 @@ book2 透過 inline interface 指定其型別
 
 以下使用 ? 表示 y 可有可無。
 
-> interface MyFunc {
->
-> ​		x: number;
->
-> ​		y?: number;
->
-> }
->
-> let func3 = (p: MyFunc) => {...}
->
->  func3({ x: 10,y:100 });
->
-> func3({ x: 200 });
+```typescript
+interface MyFunc {
+	x: number;
+	y?: number;
+}
+
+let func3 = (p: MyFunc) => {...}
+func3({ x: 10,y:100 });
+func3({ x: 200 });
+```
 
 範例中，確保 p.y 不存在， 使用 === 嚴格的檢核。
 
-> if (p.y===undefined) {
->
->  ​		console.log(p.x)
->
-> } else {
->
->  ​		console.log(p.x, p.y)
->
-> }
+```typescript
+if (p.y===undefined) {
+	console.log(p.x)
+} else {
+	console.log(p.x, p.y)
+}
+```
 
 原因可參考以下資訊 
 
 ![image-20210119150315163](Image/Readme/image-20210119150315163.png)
 
-若使用 if (p.y)  當判斷 當 p.y = 0 的時候會判讀成 false ，與原先用意不同。
+若使用 if (p.y) 當判斷 當 p.y = 0 的時候會判讀成 false ， 與原先用意不同。
 
 
 
@@ -615,9 +608,9 @@ console.log(sub(500,300));
 
 範本: 06_indexable.ts
 
-* 索引型別，只有Array的索引功能。
+* 索引型別，只有 Array 的索引功能。
 
-* 資料的使用方式在於型別，以下範例如果沒有 length:number ，for迴圈中的length就不能使用。因為他沒有length屬性。
+* 資料的使用方式在於型別，以下範例如果沒有 length:number ，for 迴圈中的 length 就不能使用。因為他沒有 length 屬性。
 
 * Array 本身就有索引屬性和Length屬性，所以可以指派給我們指定的型別。
 
@@ -646,7 +639,7 @@ for (let i = 0; i < ar.length; i++) {
 
 * Javacript 物件宣告
 
-* 在寫function時若使用this，請不要使用 => ES6 寫法
+* 在寫 function 時若使用this，請不要使用 => ES6 寫法
 
 ```typescript
 employee.showInfo=function () {
@@ -660,7 +653,7 @@ employee.showInfo=function () {
 
 範本: 08_type_template.ts
 
-因為初始化了employee，已經指定他的型別只能接收兩個參數。
+因為初始化了 employee ，已經指定他的型別只能接收兩個參數。
 
 所以就不能加方法，如果要新增方法或屬性，一開始就要定義。
 
@@ -683,7 +676,7 @@ ES6 才有的功能
 * 建構子
 * 方法
 
-產出的 ES 5  == >ES5 會需要使用function和prototype組成。
+產出的 ES 5  == >ES5 會需要使用 function 和 prototype 組成。
 
 ![image-20210119160744503](Image/Readme/image-20210119160744503.png)
 
@@ -723,7 +716,7 @@ ES6 才有的功能
 
 範本: 12_accessor.ts
 
-使用一般寫法，並撰寫Accesor
+使用一般寫法，並撰寫 Accesor 
 
 ```typescript
 class Employee {
@@ -758,17 +751,17 @@ console.log(emp.Name);
 
 **快速實做 Accessor方法 ** > 
 
-* 方法一、 對參數右鍵 Refactor 選 generate getter setter 即可。
+方法一、 對參數右鍵 Refactor 選 generate getter setter 即可。
 
 ![image-20210119165002144](Image/Readme/image-20210119165002144.png)
 
 ![image-20210119165138801](Image/Readme/image-20210119165138801.png)
 
-* 方法二、 prop 關鍵字跳出後用 tab
+方法二、 prop 關鍵字跳出後用 tab
 
 ![image-20210119165518004](Image/Readme/image-20210119165518004.png)
 
-會自動產生以下 Accessor 範本
+會自動產生以下 Accessor 範本 。
 
 ![image-20210119165535044](Image/Readme/image-20210119165535044.png)
 
