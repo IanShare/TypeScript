@@ -4,6 +4,8 @@
 
 
 
+
+
 # TypeScript 入門攻略
 
 [toc]
@@ -933,7 +935,350 @@ console.log(add(20,10));
 
 
 
-## 4-3.  
+## 4-3.  與 inteface 差異
 
-範本: 
+範本: 03_function.ts
 
+* interface 的使用是當很多 Function 需要用到共同的型別限制時，會先定義。
+
+![image-20210120110444737](Image/Readme/image-20210120110444737.png)
+
+與 3-1 不同處是
+
+宣告func1為函式，接收物件 {x:number, y:number} 
+
+```typescript
+function func1(p:{x:number, y:number}) {
+	console.log(p.x, p.y);
+}
+```
+
+宣告 add為變數，指定型別為 function
+
+let add:(i:number,j:number)=>number;
+
+
+
+## 4-4. Optional Operator
+
+範本: 04_optional.ts
+
+使用問號關鍵字，可讓 Function 定義其參數為可有可無，惟程式內要自行確保undefined的處理。
+
+```typescript
+    function add(i:number, j?:number):number {
+        if (j===undefined) {
+            return i;
+        } else {
+            return i+j;
+        }
+       
+    }
+    console.log(add(100,50));
+    console.log(add(100));
+```
+
+
+
+## 4-5. Default
+
+範本: 05_default.ts
+
+直接給參數預設值，為 ES6 寫法
+
+```typescript
+function add(i:number, j=0):number {
+	return i+j;       
+}
+```
+
+
+
+## 4-6. Rest Parameter
+
+範本: 06_rest.ts
+
+使用 ... 代表剩餘
+
+```typescript
+function sum(...numbers:number[]) {
+    let result=0;
+    numbers.forEach(i=>result+=i);
+    return result;
+}
+```
+
+如果要讓剩餘參數接收不同型態的資料可使用 union type 的方式，
+
+不過若要處理內容資料就要透過 type gaurd 檢查內容物。
+
+範本: 06_rest_2.ts
+
+```typescript
+function test(...params:(number|string)[]) {
+    let result=0;
+    console.log(params);
+    return result;
+}
+```
+
+[註] typeof 只會檢查基礎資料型他， typescript編譯會告訴我們 always false
+
+![image-20210120113751997](Image/Readme/image-20210120113751997.png)
+
+
+
+## 4-7.  overloading
+
+範本: 07_overloading.ts
+
+因為 程式語言的特性，會有覆蓋，所以只好維持一個函示，但使用簽名(ㄒㄩㄞˉ)
+
+函數的 overloading 
+
+```typescript
+function add(x: number, y: number): number; //定義add可接收的參數與接收後應該回傳的參數
+function add(x: string, y: string): string; //定義add可接收的參數與接收後應該回傳的參數
+function add(x: any, y: any): any {
+	return x + y;
+}
+
+console.log(add(100,50));
+console.log(add("aaa","bbb"));
+```
+
+範本: 07_overloading_2.ts
+
+當遇到多型的案例參數可有可無時，需要新增其對應的 overloading ( EX. 單一參數的宣告 )
+
+```typescript
+function add(x: number, y: number): number;
+function add(x: string, y: string): string;
+function add(x: string): string
+
+function add(x: any, y?: any): any { // 使用Optional時，要新增一個 add(x: string): string 的宣告
+    if (typeof y==="number") {
+        return x + y; 
+    }
+    if (typeof y==="string") {
+    	return (<string>x).toUpperCase() +", "+y.toUpperCase();
+    }
+    if (y===undefined) {
+        return (x as string).toUpperCase();
+    }
+}
+
+console.log(add(100,50));
+console.log(add("aaa","bbb"));
+console.log(add("xxx"));
+```
+
+
+
+# 伍、 NameSpace
+
+
+
+## 5-1.  使用 TSconfig 設定編譯
+
+建立新的專案路徑
+
+tsc --init 建立 config
+
+新增 01_demo.ts
+
+```typescript
+let i=10;
+```
+
+新增 02_demo.ts
+
+```typescript
+console.log(i);
+```
+
+於 tsconfig 調整
+
+ //"module": "commonjs", 
+
+ "outFile": "./demo.js", 
+
+會產出以下結果，合併。
+
+![image-20210120132013879](Image/Readme/image-20210120132013879.png)
+
+
+
+## 5-2.  Namespace 編譯與概念
+
+* IIFE ( Immediately Invoked Function Expression ) 結構
+* 沒有 Export namespace外無法使用Employee。
+* namespace等於全域變數
+
+![image-20210120132331651](Image/Readme/image-20210120132331651.png)
+
+* Export的使用，讓外部可使用
+
+![image-20210120132819601](Image/Readme/image-20210120132819601.png)
+
+
+
+## 5-3. 合併編譯
+
+範本: 03_namespace.ts、04_var.ts、05_client.ts
+
+### 編譯器指定特定檔案編譯
+
+使用以下語法對命令列編譯，會產生client.js，不會透過 tsconfig 設定會用到 es5 語法。
+
+> tsc -outfile client.js 05_client.ts
+
+以下為指定 es6 來編譯
+
+> tsc --target es6 -outfile client.js 05_client.ts
+
+以命令方式編譯，引用命名空間所在檔案方式，需要加入以下 reference 特殊語法，因為他需要知道要編一那些。
+
+/// <reference path="03_namespace.ts" />
+/// <reference path="04_var.ts" />
+
+```typescript
+/// <reference path="03_namespace.ts" />
+/// <reference path="04_var.ts" />
+let emp=new HR.Employee(1,"aaa");
+console.log(emp.getInfo());
+
+import MyEmployee=HR.Employee;
+let emp2=new MyEmployee(2,"bbb");
+console.log(emp2.getInfo());
+
+console.log(HR.projectName);
+```
+
+### TSConfig outFile 編譯方式
+
+不用加 reference，本身就會將所有檔案彙整至同一檔案。
+
+
+
+## 5-4. 使用模組載入
+
+範本: 06_export.ts 、 07_import.ts
+
+* 使用模組載入器 ， TSconfig檔案預設會使用 Node.js 的 CommonJS 模組載入器來載入。
+
+於 06_export 先匯出檔案
+
+```typescript
+export let projectName = "HR Management";
+export class Employee {
+    constructor(public empId: number, public empName: string) {
+    }
+    getInfo() {
+        return ` ${this.empId} , ${this.empName} `;
+    }
+}
+
+```
+
+於 07_import.ts  再匯入檔案
+
+````typescript
+import { Employee,projectName } from "./06_export";
+````
+
+Node.js 的 CommonJS 模組載入器來載入，產生如下右側語法。
+
+![image-20210120140338266](Image/Readme/image-20210120140338266.png)
+
+可成功執行如下。
+
+![image-20210120140713650](Image/Readme/image-20210120140713650.png)
+
+另外還有兩種做法
+
+其一透過設定式別名方式 as MyEmployee
+
+```typescript
+import { Employee as MyEmployee } from "./06_export";
+let emp=new MyEmployee(1,"aaa");
+console.log(emp.getInfo());
+```
+
+其二透過引用全部設定識別名稱方式
+
+```typescript
+import * as Demo from "./06_export";
+console.log(Demo.projectName);
+let emp=new Demo.Employee(1,"aaa");
+console.log(emp.getInfo());
+```
+
+以下需要用default匯出，一個檔案只能有一個default。
+
+```typescript
+import  Employee,{projectName} from "./06_export";
+let emp=new Employee(1,"aaa");
+console.log(emp.getInfo());
+console.log(projectName);
+```
+
+
+
+## 5-5. Module特性
+
+範本 : 08_script.html , 09_module.html
+
+### Script 屬性 Type 不是 Module
+
+沒有加模組，Script會按照順序執行，標籤還沒變物件，所以 document.querySelector("h1").textContent="Hello"; 會產生錯誤。
+
+```html
+<script>
+    let i=10;
+    console.log(1);
+</script>
+<script>
+    // let i=20;
+    console.log(i);
+    console.log(2);
+</script>
+<script>
+	document.querySelector("h1").textContent="Hello";
+</script>
+<h1>Demo</h1>
+<script>
+	console.log(3);
+</script>
+```
+
+其變數是全域
+
+![image-20210120142412625](Image/Readme/image-20210120142412625.png)
+
+### Script 屬性 Type 是 Module
+
+有加模組關鍵字的 script 會於dom載入完成最後才執行。
+
+```
+<script type="module">
+	let i=10;
+	console.log(1);
+</script>
+<script type="module">
+	let i=20;
+	console.log(i);
+	console.log(2);
+</script>
+<script type="module">
+	document.querySelector("h1").textContent="Hello";
+</script>
+<h1>Demo</h1>
+<script >
+	console.log(3);
+</script>
+```
+
+且其變數是共用
+
+![image-20210120142449520](Image/Readme/image-20210120142449520.png)

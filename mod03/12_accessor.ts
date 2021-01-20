@@ -12,16 +12,7 @@ namespace mod03 {
         }
         public get Name(){
             return this.name+"...";
-        }
-        
-        private _value : string;
-        public get value() : string {
-            return this._value;
-        }
-        public set value(v : string) {
-            this._value = v;
-        }
-        
+        }     
     }
     let emp: Employee = new Employee(1, "aaa");
    // emp.Name="bbb"
