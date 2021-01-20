@@ -1494,3 +1494,121 @@ if (isPerson(a2)) {
 }
 ```
 
+
+
+## 6-6. Generic Function
+
+printData\<T>(p: T) 其中 T 即為泛型的定義
+
+```typescript
+function printData<T>(p: T): void {
+	console.log(p)
+} 
+printData<number>(100);
+printData<string>("aaa");
+```
+
+
+
+## 6-7. Generic Interface
+
+用 Type Argument 限制型別。
+
+```typescript
+interface printDataFn<T> {
+	(p: T): void;
+}
+let f1:printDataFn<number>=i=>console.log(i+100);
+f1(50);
+
+let f2:printDataFn<string>=s=>console.log(s.toUpperCase());
+f2("aaa");
+```
+
+如果要對犯行做限制，可以透過 extends 來做限制。
+
+![image-20210120162259448](Image/Readme/image-20210120162259448.png)
+
+
+
+## 6-8. Generic Class
+
+
+
+宣告 generic Class若不想初始化時，有兩種做法
+
+1. "strictPropertyInitialization": true 設定為 false，這樣在初始化時就不會檢查，不過這是全域設定，影響較大不建議使用。
+2. 使用 驚嘆號 這樣可以略過初始化的檢查。
+
+```typescript
+class GenericClass<T> {
+	add!: (x: T, y: T) => T;
+}
+```
+
+使用方式如下:
+
+```typescript
+let c=new GenericClass<string>();
+c.add=(i,j)=>i.toUpperCase()+j.toUpperCase();//於此時才去定義方法，如果不加編譯器也可以通過，但執行階段要自行負責後果。
+console.log(c.add("aaa","bbb"));
+
+let c2=new GenericClass<number>();
+c2.add=(i,j)=>i+j;
+console.log(c2.add(50,100));
+```
+
+
+
+# 6-9. 叫用遠端程式
+
+範本:  09_fetch.ts、10_fetch.html
+
+安裝 promise套件
+
+> npm init -y
+>
+> npm i --save isomorphic-fetch es6-promise
+
+```typescript
+import "isomorphic-fetch"; // node-js環境所以需要載入。
+namespace mod06{
+    function callAPI() {
+        fetch("https://www.google.com.tw") // 需要絕對路徑
+            .then(response=>response.text())
+            .then(result=>console.log(result));
+    }
+    callAPI();
+    console.log(1);
+}
+```
+
+用瀏覽器模式就不需要 import "isomorphic-fetch"
+
+![image-20210120165612791](Image/Readme/image-20210120165612791.png)
+
+
+
+## 6-10. 使用 Async
+
+範本:  11_async.ts、12_async.html
+
+編譯器 target 要選 es2017，否則出現以下錯誤。 ( "target": "es2017" )
+
+![image-20210120165820839](Image/Readme/image-20210120165820839.png)
+
+```typescript
+callAPI();
+console.log(1);
+//因為是非同步，所以會先出現 1 再出現 aaaa... 
+```
+
+編譯後執行網頁，可看到結果。
+
+![image-20210120165953710](Image/Readme/image-20210120165953710.png)
+
+使用以下網頁查詢 fetch可發現 IE 11不支援
+
+https://caniuse.com/
+
+![image-20210120170439007](Image/Readme/image-20210120170439007.png)

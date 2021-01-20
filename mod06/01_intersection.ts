@@ -3,7 +3,7 @@ interface IEmployee {
     name: string;
 }
 interface ISales {
-    id: string;
+    id: number;
     bonus: number;
 }
 type Sales = IEmployee & ISales;
