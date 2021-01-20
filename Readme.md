@@ -399,7 +399,7 @@ console.log(j);
 * 用途為強制轉型
 * 原先為 any , 使用 dot operator 會無法解析其成員與方法。
 * 強制轉型後 dot operator可解析
-* 使用強轉型有兩種方法 「<number>a 」或 「a as number 」。
+* 使用強轉型有兩種方法 「\<number>a 」或 「a as number 」。
 
 ```typescript
 let a:any = 100.345;
@@ -764,4 +764,176 @@ console.log(emp.Name);
 會自動產生以下 Accessor 範本 。
 
 ![image-20210119165535044](Image/Readme/image-20210119165535044.png)
+
+
+
+## 3-13. Static
+
+範本: 13_static.ts
+
+* 共用成員物件
+
+* ES6 沒有 static 資料成員
+
+![image-20210120092749148](Image/Readme/image-20210120092749148.png)
+
+
+
+## 3-14. Extend (Inheritance)
+
+範本: 14_extends.ts
+
+ES6 本身就有的語法，typescript只是多了修飾詞的功能。
+
+```typescript
+class Employee {
+    constructor(private id: number, private name: string) {
+    }
+    getInfo() {
+    	return `${this.id}: ${this.name}`;
+    }
+}
+
+class Sale extends Employee {
+    constructor(id:number,name:string,public bonus:number) {
+    	super(id,name);
+    }
+}
+```
+
+
+
+## 3-15. InstanceOf ( Inheritance )
+
+範本: 14_extends.ts
+
+* 判斷物件的資料型別，基本資料型別不適用
+
+![image-20210120093724098](Image/Readme/image-20210120093724098.png)
+
+
+
+## 3-16. Override 使用方式
+
+範本: 16_overrides.ts
+
+* 父類別成員 private子類別無法存取。
+* 使用 protected，允許繼承成員使用父類別變數 (外部無法存取)。
+* 複寫時若要存取父類別方法，則使用
+
+![image-20210120094438554](Image/Readme/image-20210120094438554.png)'
+
+
+
+## 3-17.  Override use HTML inspect Object Contents
+
+範本: 17_overrides.html
+
+先將 範例 16 新增 console.log
+
+``` typescript
+let emp = new Sales(1, "aaa", 3000);
+console.log( emp )
+```
+
+將範例 16 的 ts 編譯產生 javascript.
+
+建立範本檔案: 17_overrides.html
+
+[註] ! + tab  => 產生 html 基本文件
+
+產生完再將script引入
+
+![image-20210120100650455](Image/Readme/image-20210120100650455.png)
+
+於 Extension 擴充功能安裝 live server，並對撰寫好的 html 文檔右鍵可找到執行 live server。
+
+以下為執行結果，可以看到 物件的 proto 鏈中有 Sales 的 getInfo 和  Employee 的 getInfo。
+
+![image-20210120102809092](Image/Readme/image-20210120102809092.png)
+
+
+
+## 3-17.  interface Implement
+
+範本: 18_interface.ts
+
+* 將介面 ( interface ) 定義的方法具體化實現 ， 使用 implements 關鍵字實作。
+* 要求要有 interface 定義的成員。
+
+```typescript
+interface Shape {
+    width: number;
+    height: number;
+    getArea(): number;
+}
+
+class Rectangle implements Shape {
+    constructor(public id:number,public width:number, public height:number) {  
+    }
+    getArea(): number {
+        return this.width*this.height;
+    }
+}
+
+let s:Rectangle=new Rectangle(1,10,20);
+console.log(s.id, s.getArea());
+let ss:Shape = new Rectangle(1,10,20);
+//console.log(ss.id, ss.getArea()); //會產生錯誤，因為ss被只有Shape介面的屬性，沒有 id 可以使用
+```
+
+
+
+# 肆、Function
+
+
+
+## 4-1. function 宣告
+
+範本: 01_function.ts
+
+* 指定 變數 只能是 function ， 於變數後指定 Function 關鍵字。
+* 範本如下有兩種寫法 ES5 和 ES6 
+
+```typescript
+let sayHi:Function=function () {
+    console.log("Hi");
+};
+sayHi();
+
+let add:Function=(i:number,j:number)=>i+j;
+console.log(add(20,10));
+```
+
+
+
+## 4-2.  Function type 
+
+範本: 02_type.ts
+
+ ### Function type inference
+
+使用推測方式指定， (參數) => 回傳值 ，先前範例定義 Function 是使用 (參數):回傳值 的方式，
+
+但因為是定義變數為 Function，避免衝突所以使用 => 來取代 :
+
+![image-20210120105123260](Image/Readme/image-20210120105123260.png)
+
+
+
+### Function type Define
+
+事先 add 為 Function 其參數與回傳值型別都事先定義。
+
+```typescript
+let add:(i:number,j:number)=>number;
+add=(x,y)=>x+y;
+console.log(add(20,10));
+```
+
+
+
+## 4-3.  
+
+範本: 
 
