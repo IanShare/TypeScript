@@ -1285,3 +1285,212 @@ console.log(projectName);
 
 
 
+## 5-6. 網頁載入
+
+
+
+瀏覽器 模組載入器支援 es2015
+
+先調整 tsconfig 的 "module": "commonjs" 為 "es2015"，
+
+更改完後記得編譯 
+
+
+
+## 5-7. 宣告檔案
+
+目的: 引入傳統 JS 模組 ，讓typescript編譯器能使用，但不會產生實際的 js 檔案。
+
+原本編譯器看不懂跳出提示
+
+![image-20210120150152325](Image/Readme/image-20210120150152325.png)
+
+執行註解語法，產生宣告檔案，產生後提示消失了。
+
+![image-20210120150258559](Image/Readme/image-20210120150258559.png)
+
+記得產出後，會產生都是 any，建議調整成適當的型態。
+
+![image-20210120150346670](Image/Readme/image-20210120150346670.png) 
+
+調整後如下
+
+![image-20210120150750500](Image/Readme/image-20210120150750500.png)
+
+### 網頁引用
+
+編譯完成後產出 js 檔案 
+
+範本: 12_client.html
+
+網頁依序載入
+
+```html
+<script src="sayHi.js"></script>
+<script src="js/11_declare.js"></script>
+```
+
+### 引入 JQuery 套件
+
+沒有時
+
+![image-20210120151606390](Image/Readme/image-20210120151606390.png)
+
+短網址: http://aka.ms/types
+
+取得 jquery 定義檔案
+
+![image-20210120151712468](Image/Readme/image-20210120151712468.png)
+
+安裝完後，就可以找到 jquery 套件
+
+![image-20210120151825930](Image/Readme/image-20210120151825930.png)
+
+接著只要將 13_jquery 編譯完依序引入程式碼。
+
+```html
+<h1 id="result">Demo</h1>
+<script src="https://code.jquery.com/jquery-3.5.1.js"></script>
+<script src="js/13_jquery.js"></script>
+```
+
+就會產生以下結果
+
+![image-20210120152043476](Image/Readme/image-20210120152043476.png)
+
+取代成功。
+
+
+
+# 陸 、進階主題
+
+
+
+## 6-1. 交集
+
+用 & 符號進行交集
+
+ ```typescript
+interface IEmployee {
+    id: number;
+    name: string;
+}
+interface ISales {
+    bonus: number;
+}
+type Sales = IEmployee & ISales;
+
+let s: Sales = {
+    id: 1,
+    name: 'mary',
+    bonus: 1000
+};
+ ```
+
+若要交集同一宣告名稱，型別需要一樣，否則會跳出提示。
+
+![image-20210120153230649](Image/Readme/image-20210120153230649.png)
+
+提示如下: 
+
+![image-20210120153204708](Image/Readme/image-20210120153204708.png)
+
+
+
+## 6-2. 聯集
+
+ 用 | 表示聯集
+
+判斷式會影響物件的型態。
+
+![image-20210120153601439](Image/Readme/image-20210120153601439.png)
+
+if 判斷後 typeof c === string 的 c 變成了字串。
+
+![image-20210120153705742](Image/Readme/image-20210120153705742.png)
+
+if 判斷後 typeof c !== string 的 c 變成了另一個聯集物件。
+
+![image-20210120153751429](Image/Readme/image-20210120153751429.png)
+
+
+
+## 6-3. 存取聯合型別成員
+
+只能使用其共同的方法，以下範立getAnimal後只能使用共同擁有的walk方法。
+
+```typescript
+interface Cat {
+    
+	walk(): void;
+}
+interface Person {
+    walk(): void;
+    work(): void;
+}
+
+let c: Cat = {
+    walk() {
+        console.log("Cat is walking");
+    }
+};
+
+let p: Person = {
+    walk() {
+    	console.log("Person is walking");
+    }, 
+    work() {
+    	console.log("Person is working")
+    }
+};
+
+function getAnimal(a: any): Cat | Person {
+	return a;
+}
+
+let a1 = getAnimal(c);
+let a2 = getAnimal(p);
+a1.walk();
+//a1.work(); => Error
+a2.walk();
+//a2.work(); => Error
+```
+
+
+
+## 6-4. Type Assertion
+
+若要讓範例 6-3 的物件使用 work 方法，使用 Type Assertion
+
+```typescript
+a1.walk();
+if ((<Person>a1).work!==undefined) {
+	(<Person>a1).work();
+} // 因為a1實際是cat，不具備work方法，所以不會執行 if 內的程式
+a2.walk();
+if ((<Person>a2).work!==undefined) {
+	(<Person>a2).work();
+}
+```
+
+
+
+## 6-5. Type Gaurd
+
+* 透過 Type Gaurd 語法 isPerson(o: Cat | Person): o is Person，經過檢查後即可直接使用 a1.work();
+
+* 特性是 可以將 union Type 轉回 特定 Type
+
+```typescript
+function isPerson(o: Cat | Person): o is Person {
+	return (<Person>o).work !== undefined;
+}
+if (isPerson(a1)) {
+	a1.work();
+}
+a2.walk();
+if (isPerson(a2)) {
+	a2.work();
+}
+```
+

@@ -31,6 +31,7 @@ namespace common{
     console.log(test(arr2));
     console.log(arr2);
     let myTestObj = new MyTest([1,2,3,1,2,5,8,8,7]);
+    
     console.log(myTestObj.nums);
     console.log(test2(myTestObj));
     console.log(myTestObj.nums);
