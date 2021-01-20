@@ -1081,6 +1081,8 @@ console.log(add("xxx"));
 
 ## 5-1.  使用 TSconfig 設定編譯
 
+範本:  01_demo.ts、02_demo2.ts
+
 建立新的專案路徑
 
 tsc --init 建立 config
@@ -1110,6 +1112,8 @@ console.log(i);
 
 
 ## 5-2.  Namespace 編譯與概念
+
+範本: 03_namespace.ts
 
 * IIFE ( Immediately Invoked Function Expression ) 結構
 * 沒有 Export namespace外無法使用Employee。
@@ -1287,7 +1291,7 @@ console.log(projectName);
 
 ## 5-6. 網頁載入
 
-
+範本: 10_import.html
 
 瀏覽器 模組載入器支援 es2015
 
@@ -1299,7 +1303,9 @@ console.log(projectName);
 
 ## 5-7. 宣告檔案
 
-目的: 引入傳統 JS 模組 ，讓typescript編譯器能使用，但不會產生實際的 js 檔案。
+範本: 11_declare.ts
+
+目的 : 引入傳統 JS 模組 ，讓typescript編譯器能使用，但不會產生實際的 js 檔案。
 
 原本編譯器看不懂跳出提示
 
@@ -1368,6 +1374,8 @@ console.log(projectName);
 
 ## 6-1. 交集
 
+01_intersection.ts
+
 用 & 符號進行交集
 
  ```typescript
@@ -1399,7 +1407,9 @@ let s: Sales = {
 
 ## 6-2. 聯集
 
- 用 | 表示聯集
+ 範本: 02_union.ts
+
+用 | 表示聯集
 
 判斷式會影響物件的型態。
 
@@ -1416,6 +1426,8 @@ if 判斷後 typeof c !== string 的 c 變成了另一個聯集物件。
 
 
 ## 6-3. 存取聯合型別成員
+
+範本: 03_union.ts
 
 只能使用其共同的方法，以下範立getAnimal後只能使用共同擁有的walk方法。
 
@@ -1460,6 +1472,8 @@ a2.walk();
 
 ## 6-4. Type Assertion
 
+範本: 04_assertion.ts
+
 若要讓範例 6-3 的物件使用 work 方法，使用 Type Assertion
 
 ```typescript
@@ -1477,8 +1491,9 @@ if ((<Person>a2).work!==undefined) {
 
 ## 6-5. Type Gaurd
 
-* 透過 Type Gaurd 語法 isPerson(o: Cat | Person): o is Person，經過檢查後即可直接使用 a1.work();
+範本: 05_type_guard.ts
 
+* 透過 Type Gaurd 語法 isPerson(o: Cat | Person): o is Person，經過檢查後即可直接使用 a1.work();
 * 特性是 可以將 union Type 轉回 特定 Type
 
 ```typescript
@@ -1498,6 +1513,8 @@ if (isPerson(a2)) {
 
 ## 6-6. Generic Function
 
+範本: 06_function.ts
+
 printData\<T>(p: T) 其中 T 即為泛型的定義
 
 ```typescript
@@ -1511,6 +1528,8 @@ printData<string>("aaa");
 
 
 ## 6-7. Generic Interface
+
+範本:  07_interface.ts
 
 用 Type Argument 限制型別。
 
@@ -1533,7 +1552,7 @@ f2("aaa");
 
 ## 6-8. Generic Class
 
-
+範本:  08_class.ts
 
 宣告 generic Class若不想初始化時，有兩種做法
 
@@ -1560,7 +1579,7 @@ console.log(c2.add(50,100));
 
 
 
-# 6-9. 叫用遠端程式
+## 6-9. 叫用遠端程式
 
 範本:  09_fetch.ts、10_fetch.html
 
