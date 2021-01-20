@@ -1260,7 +1260,7 @@ console.log(projectName);
 
 有加模組關鍵字的 script 會於dom載入完成最後才執行。
 
-```
+```html
 <script type="module">
 	let i=10;
 	console.log(1);
@@ -1282,3 +1282,6 @@ console.log(projectName);
 且其變數是共用
 
 ![image-20210120142449520](Image/Readme/image-20210120142449520.png)
+
+
+
