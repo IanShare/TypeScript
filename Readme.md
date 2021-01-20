@@ -1,14 +1,86 @@
-
-
-
-
-
-
-
-
 # TypeScript 入門攻略
 
-[toc]
+<!-- TOC -->
+
+- [TypeScript 入門攻略](#typescript-%E5%85%A5%E9%96%80%E6%94%BB%E7%95%A5)
+- [壹、TypeScript 安裝與環境建置](#%E5%A3%B9typescript-%E5%AE%89%E8%A3%9D%E8%88%87%E7%92%B0%E5%A2%83%E5%BB%BA%E7%BD%AE)
+    - [1-1. Node.js](#1-1-nodejs)
+    - [1-2. TypeScript TSC](#1-2-typescript-tsc)
+    - [1-3. ts-node](#1-3-ts-node)
+    - [1-4. VS Code](#1-4-vs-code)
+    - [＊ 建立專案](#%EF%BC%8A-%E5%BB%BA%E7%AB%8B%E5%B0%88%E6%A1%88)
+- [貳、基本型別簡介](#%E8%B2%B3%E5%9F%BA%E6%9C%AC%E5%9E%8B%E5%88%A5%E7%B0%A1%E4%BB%8B)
+    - [2-1. var 提升 與 let 語法 ES5 VS ES6](#2-1-var-%E6%8F%90%E5%8D%87-%E8%88%87-let-%E8%AA%9E%E6%B3%95-es5-vs-es6)
+    - [2-2. 指派與預設推斷變數型別](#2-2-%E6%8C%87%E6%B4%BE%E8%88%87%E9%A0%90%E8%A8%AD%E6%8E%A8%E6%96%B7%E8%AE%8A%E6%95%B8%E5%9E%8B%E5%88%A5)
+    - [2-3. 數字特性 ES5 VS ES6](#2-3-%E6%95%B8%E5%AD%97%E7%89%B9%E6%80%A7-es5-vs-es6)
+    - [2-4. String Template ES5 VS ES6](#2-4-string-template-es5-vs-es6)
+    - [2-5. 陣列宣告方式](#2-5-%E9%99%A3%E5%88%97%E5%AE%A3%E5%91%8A%E6%96%B9%E5%BC%8F)
+    - [2-6. Tuple 宣告方式](#2-6-tuple-%E5%AE%A3%E5%91%8A%E6%96%B9%E5%BC%8F)
+    - [2-7. Enum 宣告與使用方式](#2-7-enum-%E5%AE%A3%E5%91%8A%E8%88%87%E4%BD%BF%E7%94%A8%E6%96%B9%E5%BC%8F)
+    - [2-8. Null / Undefined 的宣告使用](#2-8--null--undefined-%E7%9A%84%E5%AE%A3%E5%91%8A%E4%BD%BF%E7%94%A8)
+    - [2-9. Any](#2-9--any)
+    - [2-10. Void](#2-10--void)
+    - [2-11. Inferance](#2-11-inferance)
+    - [2-12. Assertion](#2-12--assertion)
+- [參、複雜型別簡介](#%E5%8F%83%E8%A4%87%E9%9B%9C%E5%9E%8B%E5%88%A5%E7%B0%A1%E4%BB%8B)
+    - [＊ interface](#%EF%BC%8A-interface)
+    - [3-1. inline Interface](#3-1-inline-interface)
+    - [3-2. Interface](#3-2--interface)
+    - [3-3. Interface with Array](#3-3--interface-with-array)
+    - [3-4. interface optional](#3-4-interface-optional)
+    - [3-5. Function with Interface](#3-5-function-with-interface)
+    - [3-6. index](#3-6-index)
+    - [＊ 物件](#%EF%BC%8A-%E7%89%A9%E4%BB%B6)
+    - [3-7. Javacript 物件使用方式](#3-7-javacript-%E7%89%A9%E4%BB%B6%E4%BD%BF%E7%94%A8%E6%96%B9%E5%BC%8F)
+    - [3-8. Type Template](#3-8-type-template)
+    - [＊ 類別](#%EF%BC%8A-%E9%A1%9E%E5%88%A5)
+    - [3-9. Class](#3-9-class)
+    - [3-10. CLASS 存取詞 public / private](#3-10-class-%E5%AD%98%E5%8F%96%E8%A9%9E-public--private)
+    - [3-11. Ctor  Constructor  簡便寫法](#3-11-ctor--constructor--%E7%B0%A1%E4%BE%BF%E5%AF%AB%E6%B3%95)
+    - [3-12. Accessor](#3-12-accessor)
+    - [3-13. Static](#3-13-static)
+    - [3-14. Extend Inheritance](#3-14-extend-inheritance)
+    - [3-15. InstanceOf  Inheritance](#3-15-instanceof--inheritance)
+    - [3-16. Override 使用方式](#3-16-override-%E4%BD%BF%E7%94%A8%E6%96%B9%E5%BC%8F)
+    - [3-17. Override use HTML inspect Object Contents](#3-17-override-use-html-inspect-object-contents)
+    - [3-18. Interface Implement](#3-18-Interface-implement)
+- [肆、Function](#%E8%82%86function)
+    - [4-1. function 宣告](#4-1-function-%E5%AE%A3%E5%91%8A)
+    - [4-2. Function type](#4-2--function-type)
+        - [Function type inference](#function-type-inference)
+        - [Function type Define](#function-type-define)
+    - [4-3. 與 inteface 差異](#4-3--%E8%88%87-inteface-%E5%B7%AE%E7%95%B0)
+    - [4-4. Optional Operator](#4-4-optional-operator)
+    - [4-5. Default](#4-5-default)
+    - [4-6. Rest Parameter](#4-6-rest-parameter)
+    - [4-7. Overloading](#4-7-Overloading)
+- [伍、 NameSpace](#%E4%BC%8D-namespace)
+    - [5-1. 使用 TSconfig 設定編譯](#5-1--%E4%BD%BF%E7%94%A8-tsconfig-%E8%A8%AD%E5%AE%9A%E7%B7%A8%E8%AD%AF)
+    - [5-2. Namespace 編譯與概念](#5-2--namespace-%E7%B7%A8%E8%AD%AF%E8%88%87%E6%A6%82%E5%BF%B5)
+    - [5-3. 合併編譯](#5-3-%E5%90%88%E4%BD%B5%E7%B7%A8%E8%AD%AF)
+        - [編譯器指定特定檔案編譯](#%E7%B7%A8%E8%AD%AF%E5%99%A8%E6%8C%87%E5%AE%9A%E7%89%B9%E5%AE%9A%E6%AA%94%E6%A1%88%E7%B7%A8%E8%AD%AF)
+        - [TSConfig outFile 編譯方式](#tsconfig-outfile-%E7%B7%A8%E8%AD%AF%E6%96%B9%E5%BC%8F)
+    - [5-4. 使用模組載入](#5-4-%E4%BD%BF%E7%94%A8%E6%A8%A1%E7%B5%84%E8%BC%89%E5%85%A5)
+    - [5-5. Module特性](#5-5-module%E7%89%B9%E6%80%A7)
+        - [Script 屬性 Type 不是 Module](#script-%E5%B1%AC%E6%80%A7-type-%E4%B8%8D%E6%98%AF-module)
+        - [Script 屬性 Type 是 Module](#script-%E5%B1%AC%E6%80%A7-type-%E6%98%AF-module)
+    - [5-6. 網頁載入](#5-6-%E7%B6%B2%E9%A0%81%E8%BC%89%E5%85%A5)
+    - [5-7. 宣告檔案](#5-7-%E5%AE%A3%E5%91%8A%E6%AA%94%E6%A1%88)
+        - [網頁引用](#%E7%B6%B2%E9%A0%81%E5%BC%95%E7%94%A8)
+        - [引入 JQuery 套件](#%E5%BC%95%E5%85%A5-jquery-%E5%A5%97%E4%BB%B6)
+- [陸 、進階主題](#%E9%99%B8-%E9%80%B2%E9%9A%8E%E4%B8%BB%E9%A1%8C)
+    - [6-1. 交集](#6-1-%E4%BA%A4%E9%9B%86)
+    - [6-2. 聯集](#6-2-%E8%81%AF%E9%9B%86)
+    - [6-3. 存取聯合型別成員](#6-3-%E5%AD%98%E5%8F%96%E8%81%AF%E5%90%88%E5%9E%8B%E5%88%A5%E6%88%90%E5%93%A1)
+    - [6-4. Type Assertion](#6-4-type-assertion)
+    - [6-5. Type Gaurd](#6-5-type-gaurd)
+    - [6-6. Generic Function](#6-6-generic-function)
+    - [6-7. Generic Interface](#6-7-generic-interface)
+    - [6-8. Generic Class](#6-8-generic-class)
+    - [6-9. 叫用遠端程式](#6-9-%E5%8F%AB%E7%94%A8%E9%81%A0%E7%AB%AF%E7%A8%8B%E5%BC%8F)
+    - [6-10. 使用 Async](#6-10-%E4%BD%BF%E7%94%A8-async)
+
+<!-- /TOC -->
 
 # 壹、TypeScript 安裝與環境建置
 
@@ -321,7 +393,7 @@ console.log(Color[c]);
 
 
 
-## 2-8.  Null / Undefined 的宣告使用
+## 2-8. Null / Undefined 的宣告使用
 
 範本: 07_object.js
 
@@ -359,7 +431,7 @@ console.log(j);
 
 
 
-## 2-9.  Any
+## 2-9. Any
 
 範本: 11_any.ts
 
@@ -371,7 +443,7 @@ console.log(j);
 
 
 
-##  2-10.  Void 
+##  2-10. Void 
 
 範本: 12_void.ts
 
@@ -394,7 +466,7 @@ console.log(j);
 
 
 
-## 2-12.  Assertion
+## 2-12. Assertion
 
 範本: 14_assertion.ts
 
@@ -459,7 +531,7 @@ let func1= (p:{x:number, y:number})=> {
 
 
 
-## 3-2.  Interface
+## 3-2. Interface
 
 範本: 02_interface.ts
 
@@ -492,7 +564,7 @@ let func2=function (p:MyFunc) {
 
 
 
-## 3-3.  Interface with Array
+## 3-3. Interface with Array
 
 範本:  03_interface.ts
 
@@ -827,7 +899,7 @@ class Sale extends Employee {
 
 
 
-## 3-17.  Override use HTML inspect Object Contents
+## 3-17. Override use HTML inspect Object Contents
 
 範本: 17_overrides.html
 
@@ -856,7 +928,7 @@ console.log( emp )
 
 
 
-## 3-17.  interface Implement
+## 3-18. Interface Implement
 
 範本: 18_interface.ts
 
@@ -909,7 +981,7 @@ console.log(add(20,10));
 
 
 
-## 4-2.  Function type 
+## 4-2. Function type 
 
 範本: 02_type.ts
 
@@ -935,7 +1007,7 @@ console.log(add(20,10));
 
 
 
-## 4-3.  與 inteface 差異
+## 4-3. 與 inteface 差異
 
 範本: 03_function.ts
 
@@ -1028,7 +1100,7 @@ function test(...params:(number|string)[]) {
 
 
 
-## 4-7.  overloading
+## 4-7. Overloading
 
 範本: 07_overloading.ts
 
@@ -1079,7 +1151,7 @@ console.log(add("xxx"));
 
 
 
-## 5-1.  使用 TSconfig 設定編譯
+## 5-1. 使用 TSconfig 設定編譯
 
 範本:  01_demo.ts、02_demo2.ts
 
@@ -1111,7 +1183,7 @@ console.log(i);
 
 
 
-## 5-2.  Namespace 編譯與概念
+## 5-2. Namespace 編譯與概念
 
 範本: 03_namespace.ts
 
